@@ -3,6 +3,24 @@ import useSignup from '../hooks/useSignup';
 import { Link } from 'react-router-dom'
 
 const SignupPage = () => {
+
+    const validateEmail = (email) => {
+        const EMAIL_REGEX = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/;
+        return EMAIL_REGEX.test(String(email).toLowerCase());
+    };
+
+    const validate = () => {
+        let validation = true;
+        const newErrors = {};
+
+        if (!email) {
+            validation = false;
+            newErrors.email = 'Email is required';
+        } else if (!validateEmail(email)) {
+            validation = false;
+            newErrors.email = 'Email is invalid';
+        }
+    }
     
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -12,6 +30,7 @@ const SignupPage = () => {
     const handleSubmit = () => {
         const validation = true;
         if (validation) {
+            validate();
             signup({ email, name, password });
         }
 
