@@ -5,39 +5,65 @@ import { Link } from 'react-router-dom'
 const SignupPage = () => {
 
     const validateEmail = (email) => {
-        const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return EMAIL_REGEX.test(String(email).toLowerCase());
-    };
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
 
-    const validate = () => {
-        let validation = true;
-        const newErrors = {};
+    // const validate = () => {
+    //     let validation = true;
+    //     const newErrors = {};
 
-        if (!email) {
-            validation = false;
-            newErrors.email = 'Email is required';
-        } else if (!validateEmail(email)) {
-            validation = false;
-            newErrors.email = 'Email is invalid';
-        }
-    }
+    //     if (!email) {
+    //         validation = false;
+    //         newErrors.email = 'Email is required';
+    //     } else if (!validateEmail(email)) {
+    //         validation = false;
+    //         newErrors.email = 'Email is invalid';
+    //     }
+    // }
     
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const { signup } = useSignup();
 
-    const handleSubmit = () => {
-        const validation = true;
-        if (validation) {
-            validate();
-            signup({ email, name, password });
-        }
+    const validate = () => {
+    let validation = true;
 
-        else {
-            alert("Validation failed");
-        }
+    if (!email) {
+        alert( "Email is required");
+    } else if (!validateEmail(email)) {
+        validation = true;
+        alert("Email is invalid");
     }
+
+   
+
+    if (!password) {
+        validation = false;
+        alert( "Password is required");
+    } 
+
+
+    if (validation) {
+      signup({ email, name, password });
+        setEmail("");
+        setName("");
+        setPassword("");
+    }
+};
+
+    // const handleSubmit = () => {
+    //     const validation = true;
+    //     if (validation) {
+    //         validate();
+    //         signup({ email, name, password });
+    //     }
+
+    //     else {
+    //         alert("Validation failed");
+    //     }
+    // }
 
     return (
         <div className='signup-page-main-container'>
