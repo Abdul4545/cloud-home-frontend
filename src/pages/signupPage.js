@@ -69,7 +69,7 @@ const SignupPage = () => {
         <div className='signup-page-main-container'>
             <div className='signup-page-container'>
                 <h3 style={{textAlign: "center"}}>Sign Up</h3>
-                <input type='email' placeholder='Enter Email' className='signup-page-container-email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type='text' placeholder='Enter Email' className='signup-page-container-email' value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type='text' placeholder='Enter Name' className='signup-page-container-name' value={name} onChange={(e) => setName(e.target.value)} />
                 <input type='password' placeholder='Enter Password' className='signup-page-container-password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button onClick={validate} className='signup-page-container-sign-button'>Sign Up</button>
